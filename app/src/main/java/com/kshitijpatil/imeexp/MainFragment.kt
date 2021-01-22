@@ -17,10 +17,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.fragment.app.Fragment
 import com.kshitijpatil.imeexp.ui.theme.ImeGlitchTheme
-import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
-import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
-import dev.chrisbanes.accompanist.insets.ViewWindowInsetObserver
-import dev.chrisbanes.accompanist.insets.navigationBarsPadding
+import dev.chrisbanes.accompanist.insets.*
 
 class MainFragment: Fragment() {
 
@@ -28,37 +25,45 @@ class MainFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = ComposeView(requireContext()).apply {
-        id = R.id.mainFragment
-        layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-        // Create an ViewWindowInsetObserver using this view
-        val observer = ViewWindowInsetObserver(this)
-        // Call start() to start listening now.
-        // The WindowInsets instance is returned to us.
-        val windowInsets = observer.start()
-        setContent {
-            ImeGlitchTheme {
-                Providers(AmbientWindowInsets provides windowInsets) {
-                    var text by remember { mutableStateOf(TextFieldValue()) }
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        Column(modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .navigationBarsPadding()
-                        ) {
-                            Text(
-                                "Click Here \u2193",
-                                style = MaterialTheme.typography.h5,
-                                color = Color.White,
-                                //modifier = Modifier.fillMaxWidth().wrapContentWidth()
-                            )
-                            OutlinedTextField(
-                                value = text,
-                                onValueChange = { text = it },
-                            )
-                        }
+    ): View {
+        return ComposeView(requireContext()).apply {
+            id = R.id.mainFragment
+            layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            // Create an ViewWindowInsetObserver using this view
+            val observer = ViewWindowInsetObserver(this)
+            // Call start() to start listening now.
+            // The WindowInsets instance is returned to us.
+            val windowInsets = observer.start()
+            setContent {
+                ImeGlitchTheme {
+                    Providers(AmbientWindowInsets provides windowInsets) {
+                        MainContent()
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun MainContent() {
+    var text by remember { mutableStateOf(TextFieldValue()) }
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .navigationBarsWithImePadding()
+        ) {
+            Text(
+                "Click Here \u2193",
+                style = MaterialTheme.typography.h5,
+                color = Color.White,
+                //modifier = Modifier.fillMaxWidth().wrapContentWidth()
+            )
+            OutlinedTextField(
+                value = text,
+                onValueChange = { text = it },
+            )
         }
     }
 }

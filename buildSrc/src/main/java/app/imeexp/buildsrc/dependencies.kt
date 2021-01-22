@@ -187,8 +187,8 @@ object Libs {
         }
 
         object Compose {
-            const val snapshot = ""
-            const val version = "1.0.0-alpha10"
+            const val snapshot = "7094152"
+            const val version = "1.0.0-SNAPSHOT"
 
             @get:JvmStatic
             val snapshotUrl: String
@@ -260,7 +260,7 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.4.2"
+        private const val version = "0.4.3.compose-7094152-SNAPSHOT"
         const val coil = "dev.chrisbanes.accompanist:accompanist-coil:$version"
         const val glide = "dev.chrisbanes.accompanist:accompanist-glide:$version"
         const val insets = "dev.chrisbanes.accompanist:accompanist-insets:$version"

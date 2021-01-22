@@ -61,6 +61,7 @@ dependencies {
     implementation Libs.AndroidX.Compose.Ui.tooling
     implementation Libs.AndroidX.Compose.livedata
     implementation Libs.Accompanist.insets
+    implementation Libs.Insetter.insetter
 
     testImplementation Libs.junit
     testImplementation Libs.AndroidX.Test.rules

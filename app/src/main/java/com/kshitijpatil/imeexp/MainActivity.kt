@@ -2,20 +2,18 @@ package com.kshitijpatil.imeexp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Text
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.setContent
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
+import androidx.fragment.app.FragmentActivity
 import com.kshitijpatil.imeexp.databinding.ActivityMainBinding
-import com.kshitijpatil.imeexp.ui.theme.ImeGlitchTheme
+import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : FragmentActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        //binding.root.applySystemWindowInsetsToPadding()
+        setContentView(binding.root)
         // This app draws behind the system bars, so we want to handle fitting system windows
         WindowCompat.setDecorFitsSystemWindows(window, false)
     }
