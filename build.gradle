@@ -1,0 +1,43 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+import app.imeexp.buildsrc.Libs
+
+buildscript {
+    ext.buildConfig = [
+            'compileSdk': 30,
+            'minSdk'    : 21,
+            'targetSdk' : 30,
+    ]
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+
+        maven { url "https://jitpack.io" }
+
+        // Jetpack Compose SNAPSHOTs
+        if (Libs.AndroidX.Compose.version.endsWith("SNAPSHOT")) {
+            maven { url Libs.AndroidX.Compose.snapshotUrl }
+        }
+
+        // Used for Accompanist snapshots
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
