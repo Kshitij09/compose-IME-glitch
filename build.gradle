@@ -32,7 +32,6 @@ allprojects {
         if (Libs.AndroidX.Compose.version.endsWith("SNAPSHOT")) {
             maven { url Libs.AndroidX.Compose.snapshotUrl }
         }
-
         // Used for Accompanist snapshots
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }

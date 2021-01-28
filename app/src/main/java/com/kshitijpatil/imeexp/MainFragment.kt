@@ -1,6 +1,7 @@
 package com.kshitijpatil.imeexp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,11 +49,13 @@ class MainFragment: Fragment() {
 @Composable
 fun MainContent() {
     var text by remember { mutableStateOf(TextFieldValue()) }
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier
+        .navigationBarsPadding()
+        .fillMaxSize()
+    ) {
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .navigationBarsWithImePadding()
         ) {
             Text(
                 "Click Here \u2193",
