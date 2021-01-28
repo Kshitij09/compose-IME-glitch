@@ -65,7 +65,10 @@ fun MainContent() {
             )
             OutlinedTextField(
                 value = text,
-                onValueChange = { text = it },
+                onValueChange = {
+                    Log.i("MainContent","Value Changed")
+                    text = it
+                },
             )
         }
     }
